@@ -1,0 +1,9 @@
+com\empresaurios\crud\model\Usuario.class
+com\empresaurios\crud\util\HibernateUtil.class
+com\empresaurios\crud\bean\UsuarioBean.class
+com\empresaurios\crud\dao\UsuarioDao.class
+com\empresaurios\crud\dao\AutoDao.class
+com\empresaurios\crud\util\CommonUtils.class
+com\empresaurios\crud\bean\AutoBean.class
+com\empresaurios\crud\dao\IDao.class
+com\empresaurios\crud\model\Auto.class

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <link href="CSS/style.css" rel="stylesheet" type="text/css" />
+
+    <head>
+        <title>Inicio</title>
+        <meta charset="UTF-8"/>
+        <meta name='language' content='ES'/>
+    </head>
+
+    <body>
+
+
+        <h:form rendered="#{(usuarioBean.verificarSesion())}" >
+            <div class="welcome-card" >
+                <h1>Bienvenido usuario: #{usuarioBean.usuario.nombreUsuario}
+                    <h:commandButton class="btn-close" value="Cerrar sesión" action="#{usuarioBean.cerrarSesion()}"/>
+                </h1>
+
+
+            </div>
+        </h:form>
+
+
+
+        <h:panelGroup rendered="#{!autoBean.edit and (usuarioBean.verificarSesion())}">
+            <div class="card">
+                <h2>Agregar auto</h2>
+                <h:form>
+                    <p>Modelo:
+                        <h:inputText value="#{autoBean.item.model}" />
+                    </p>
+                    <p>Capacidad:
+                        <h:inputText value="#{autoBean.item.capacity}" />
+                    </p>
+                    <p>Puertas:
+                        <h:inputText value="#{autoBean.item.doors}" />
+                    </p>
+                    <p>
+                        <h:commandButton class="btn" value="Agregar" action="#{autoBean.add}" />
+
+                        <h:commandButton class="btn-right" value="Limpiar" action="#{autoBean.resetAdd}" />
+                    </p>
+                </h:form>
+            </div>
+        </h:panelGroup>
+
+
+
+        <h:panelGroup rendered="#{autoBean.edit and (usuarioBean.verificarSesion())}">
+            <div class="card">
+                <h2>Editar auto #{bean.item.id}</h2>
+                <h:form>
+                    <p>Modelo:
+                        <h:inputText value="#{autoBean.item.model}" />
+                    </p>
+                    <p>Capacidad:
+                        <h:inputText value="#{autoBean.item.capacity}" />
+                    </p>
+                    <p>Puertas:
+                        <h:inputText value="#{autoBean.item.doors}" />
+                    </p>
+                    <p>
+                        <h:commandButton class="btn" value="Guardar" action="#{autoBean.saveEdit}" />
+                        <h:commandButton class="btn-right" value="Cancelar" action="#{autoBean.cancelEdit}" />
+                    </p>
+                </h:form>
+            </div>
+        </h:panelGroup>
+        <h:form rendered="#{not empty autoBean.autos and (usuarioBean.verificarSesion())}">
+            <div class="new-table">
+                <h1>Autos</h1>
+                <h:dataTable value="#{autoBean.autos}" var="auto">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>#{auto.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Modelo</f:facet>#{auto.model}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Capacidad</f:facet>#{auto.capacity}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Puertas</f:facet>#{auto.doors}
+                    </h:column>
+                    <h:column>
+                        <h:commandButton class="btn" value="Editar" action="#{autoBean.edit(auto)}" />
+                    </h:column>
+                    <h:column>
+                        <h:commandButton class="btn" value="Eliminar" action="#{autoBean.delete(auto)}" />
+                    </h:column>
+                </h:dataTable>
+            </div>
+        </h:form>
+
+        <h:panelGroup rendered="#{empty autoBean.autos and (usuarioBean.verificarSesion())}">
+            <p>No hay autos, por favor agrega mas autos.</p>
+        </h:panelGroup>
+
+    </body>
+
+</html>
